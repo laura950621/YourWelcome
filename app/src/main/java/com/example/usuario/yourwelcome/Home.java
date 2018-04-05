@@ -10,6 +10,7 @@ import android.widget.Toast;
 public class Home extends AppCompatActivity implements View.OnClickListener{
 
     Button bnt1,btn2,btn3;
+    int contador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                 Toast.makeText(getApplication(),"Hola Listen",Toast.LENGTH_LONG).show();
             }
         });
+
+        Bundle recibo = getIntent().getExtras();
+
+        if(recibo!=null){
+            contador = recibo.getInt("contador");
+        }
+        if(savedInstanceState!=null){
+            contador=savedInstanceState.getInt("contador");
+        }
     }
 
     //VOLVER - INLINE
@@ -41,6 +51,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     public void irPulso(View g){
         Intent ir = new Intent(Home.this,Pulso.class);
         ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
+        Bundle entrega = new Bundle();
+        entrega.putInt("contador",contador);
+        ir.putExtras(entrega);
         startActivity(ir);
     }
 
