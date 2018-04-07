@@ -56,6 +56,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         ir.putExtras(entrega);
         startActivity(ir);
     }
+            /*
+            * param: none
+            * propose: Call TestService Activity
+             */
+    public void irTestService(){
+        Intent ir = new Intent(Home.this,TestService.class);
+        ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(ir);
+    }
 
     @Override
     public void onClick(View view) {
@@ -64,7 +73,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                 Toast.makeText(this,"Hola interface",Toast.LENGTH_LONG).show();
                 break;
             case R.id.bntInterface2:
-                Toast.makeText(this,"Hola interface2",Toast.LENGTH_LONG).show();
+                irTestService();
                 break;
             default:
                 Toast.makeText(this,"Hola",Toast.LENGTH_LONG).show();
