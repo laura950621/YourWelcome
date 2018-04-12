@@ -9,6 +9,9 @@ import com.example.usuario.yourwelcome.Servicios.Prueba;
 
 public class TestService extends AppCompatActivity {
 
+
+    Intent servicio;
+    boolean flag2=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,17 +24,27 @@ public class TestService extends AppCompatActivity {
         startActivity(ir);
     }
     public void IniciarServicio1(View g){
-        Intent servicio = new Intent(TestService.this, Prueba.class);
+        servicio = new Intent(TestService.this, Prueba.class);
         Bundle datos = new Bundle();
         datos.putInt("opcion",1);
         servicio.putExtras(datos);
+        flag2=true;
         startService(servicio);
     }
     public void IniciarServicio2(View g){
-        Intent servicio = new Intent(TestService.this, Prueba.class);
+        servicio = new Intent(TestService.this, Prueba.class);
         Bundle datos = new Bundle();
         datos.putInt("opcion",2);
         servicio.putExtras(datos);
+        flag2=true;
         startService(servicio);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag2){
+            stopService(servicio);
+        }
     }
 }

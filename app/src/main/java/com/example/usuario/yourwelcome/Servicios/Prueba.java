@@ -8,10 +8,16 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import java.sql.BatchUpdateException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Prueba extends Service {
     public Prueba() {
     }
+
+    String fecha;
+    SimpleDateFormat dateFormat;
 
     Hilo obj;
 
@@ -24,23 +30,19 @@ public class Prueba extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        obj = new Hilo();
+        dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         int opcion = intent.getExtras().getInt("opcion");
         //Toast.makeText(this,"Hola:"+opcion,Toast.LENGTH_LONG).show();
+        obj = new Hilo();
         if(opcion==1){
-            /*for (int i=0;i<=100;i++){
-                if(i==1 || i==10 || i==20 || i==30 || i==40 || i==50 || i==60 || i==70 || i==80|| i==90|| i==100){
-                    Toast.makeText(this,"Hola:"+i,Toast.LENGTH_LONG).show();
-                }
-            }*/
             for (int i=0;i<=3;i++){
                 try {
-                    Thread.sleep(5000);
-                    Toast.makeText(this,"Hola:"+i,Toast.LENGTH_SHORT).show();
+                    Thread.sleep(2000);
+                    Toast.makeText(this,"Fecha: "+fecha,Toast.LENGTH_SHORT).show();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -48,7 +50,7 @@ public class Prueba extends Service {
         }else if(opcion==2){
             obj.execute();
         }
-        stopSelf();
+        //stopSelf();
         return super.onStartCommand(intent, flags, startId);
     }
     //<param,progrees,result>
@@ -57,8 +59,9 @@ public class Prueba extends Service {
         protected Void doInBackground(Void... voids) {
             for (int i=0;i<=3;i++){
                 try {
-                    Thread.sleep(2000);
+
                     publishProgress(i);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -69,7 +72,8 @@ public class Prueba extends Service {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            Toast.makeText(getApplicationContext(),"AsyncTask:"+values[0],Toast.LENGTH_SHORT).show();
+            fecha = dateFormat.format(new Date());
+            Toast.makeText(getApplicationContext(),"Fecha: "+values[0]+" "+fecha,Toast.LENGTH_SHORT).show();
         }
     }
 
