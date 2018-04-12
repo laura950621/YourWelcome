@@ -1,6 +1,8 @@
 package com.example.usuario.yourwelcome;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +11,11 @@ import android.widget.Toast;
 
 public class Home extends AppCompatActivity implements View.OnClickListener{
 
-    Button bnt1,btn2,btn3;
+    Button bnt1,btn2,btn3,btnVolver,btnPintar;
     int contador;
+
+    Pintar obj;
+    boolean flag=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +27,16 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         btn2 = (Button) findViewById(R.id.btnListen);
         btn3 = (Button) findViewById(R.id.bntInterface2);
 
+        btnVolver = (Button) findViewById(R.id.btnVolver);
+
+        btnPintar = (Button) findViewById(R.id.btnPintar);
+
+        //btnVolver.setBackgroundColor(Color.rgb(255,0,0));
+
         bnt1.setOnClickListener(this);
         btn3.setOnClickListener(this);
+        btnVolver.setOnClickListener(this);
+        btnPintar.setOnClickListener(this);
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +88,71 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             case R.id.bntInterface2:
                 irTestService();
                 break;
+            case R.id.btnVolver:
+                irTestService();
+                break;
+            case R.id.btnPintar:
+                Toast.makeText(this, "-->>"+flag, Toast.LENGTH_LONG).show();
+                if(!flag){
+                    obj=new Pintar();//inicializamos
+                    obj.execute();//ejecutamos
+                }else{
+                    obj.cancel(true);
+                }
+                break;
+
             default:
                 Toast.makeText(this,"Hola",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public int GenerarAleatorio(){
+        return  (int) (Math.random()*255);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag){
+            obj.cancel(true);
+        }
+
+    }
+
+    public class Pintar extends AsyncTask<Void,Void,Void>{
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            flag=true;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            while (flag){
+                publishProgress();
+                if (isCancelled()){
+                    break;
+                }
+            }
+            return null;
+        }
+        protected void onProgressUpdate(Void... voids) {
+            super.onProgressUpdate();
+            btnVolver.setBackgroundColor(Color.rgb(GenerarAleatorio(),GenerarAleatorio(),GenerarAleatorio()));
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            flag=false;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            flag=false;
+
         }
     }
 }

@@ -13,12 +13,7 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="irMain"
-            android:text="Volver" />
+
 
         <Button
             android:id="@+id/button3"
@@ -28,24 +23,57 @@
             android:onClick="irPulso"
             android:text="Sumar" />
 
-        <Button
-            android:id="@+id/bntInterface"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Interface" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnListen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Listen"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/bntInterface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Interface"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/bntInterface2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Probar Servicio" />
+            android:layout_weight="1"
+            android:text="Fecha" />
 
         <Button
-            android:id="@+id/btnListen"
-            android:layout_width="match_parent"
-            android:textStyle="bold"
+            android:id="@+id/btnPintar"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Listen" />
+            android:textStyle="bold"
+            android:text="Colorear" />
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/btnVolver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="irMain"
+            android:text="Volver" />
+
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
