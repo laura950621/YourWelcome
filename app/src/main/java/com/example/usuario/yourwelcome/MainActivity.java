@@ -19,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
         ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(ir);
     }
+    public void irHomeApp(View g){
+        Intent ir = new Intent(MainActivity.this,HomeApp.class);
+        ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(ir);
+    }
     @Override
     protected void onPause() {
         super.onPause();

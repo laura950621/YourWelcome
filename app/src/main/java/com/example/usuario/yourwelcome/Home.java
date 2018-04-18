@@ -56,7 +56,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     }
 
     //VOLVER - INLINE
-    public void irMain(View g){
+    public void irMainApp(View g){
         Intent ir = new Intent(Home.this,MainActivity.class);
         ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(ir);

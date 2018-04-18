@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">YourWelcome</string>
     <string name="btnHome">Ingresar</string>
+    <string name="btnHomeApp">Log In</string>
+    <string name="network">Network</string>
+    <string name="data_base">DataBase</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
