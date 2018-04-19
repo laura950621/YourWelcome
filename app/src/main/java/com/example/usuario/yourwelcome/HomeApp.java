@@ -16,10 +16,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class HomeApp extends AppCompatActivity implements DataBaseCrud.OnFragmentInteractionListener {
+public class HomeApp extends AppCompatActivity implements DataBaseCrud.OnFragmentInteractionListener, Network.OnFragmentInteractionListener {
 
 
     DataBaseCrud frag;
+    Network networkFrag;
+
     FragmentManager manager;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -49,6 +51,13 @@ public class HomeApp extends AppCompatActivity implements DataBaseCrud.OnFragmen
             transition.add(R.id.layout_frag,frag);
             transition.commit();
         }
+    }
+
+    public void showNetworkOptions(){
+        networkFrag = new Network();
+        android.support.v4.app.FragmentTransaction transactionNet = getSupportFragmentManager().beginTransaction();
+        transactionNet.add(R.id.layout_frag,networkFrag);
+        transactionNet.commit();
     }
 
     public  void cerrarDatabaseOptions(View g){
@@ -97,7 +106,8 @@ public class HomeApp extends AppCompatActivity implements DataBaseCrud.OnFragmen
                 return true;
 
             case R.id.action_network:
-                Toast.makeText(this,"hola "+item.getTitle(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(this,"hola "+item.getTitle(),Toast.LENGTH_LONG).show();
+                showNetworkOptions();
                 return true;
 
             default:

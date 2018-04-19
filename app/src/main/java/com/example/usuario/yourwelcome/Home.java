@@ -2,20 +2,24 @@ package com.example.usuario.yourwelcome;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class Home extends AppCompatActivity implements View.OnClickListener{
+public class Home extends AppCompatActivity implements View.OnClickListener, Network.OnFragmentInteractionListener{
 
     Button bnt1,btn2,btn3,btnVolver,btnPintar;
     int contador;
 
     Pintar obj;
     boolean flag=false;
+
+    Network fragN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +59,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+    public void showFragment(View h){
+        fragN = new Network();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.frameLayoutHome,fragN);
+        transaction.commit();
+    }
+
     //VOLVER - INLINE
-    public void irMainApp(View g){
+    public void irMainApp(){
         Intent ir = new Intent(Home.this,MainActivity.class);
         ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(ir);
@@ -89,7 +100,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                 irTestService();
                 break;
             case R.id.btnVolver:
-                irTestService();
+                irMainApp();
                 break;
             case R.id.btnPintar:
                 Toast.makeText(this, "-->>"+flag, Toast.LENGTH_LONG).show();
@@ -116,6 +127,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         if(flag){
             obj.cancel(true);
         }
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 
