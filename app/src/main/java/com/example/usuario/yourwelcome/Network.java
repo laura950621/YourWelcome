@@ -2,6 +2,7 @@ package com.example.usuario.yourwelcome;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.usuario.yourwelcome.Connection.Connection;
 
 
 /**
@@ -30,6 +34,9 @@ public class Network extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Connection conexion;
+    SQLiteDatabase db;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,6 +71,15 @@ public class Network extends Fragment {
         }
         //hasOptionsMenu();
         setHasOptionsMenu(true);
+        conexion = new Connection(getContext(),"UnivalleDb",null,1);
+        db = conexion.getWritableDatabase();
+        if(conexion!=null){
+            Toast.makeText(getContext(),"Bd Creadad",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void dataBaseCreate(){
+
     }
 
     @Override
