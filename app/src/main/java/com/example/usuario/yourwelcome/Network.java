@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.usuario.yourwelcome.Connection.Connection;
@@ -37,6 +39,10 @@ public class Network extends Fragment {
 
     Connection conexion;
     SQLiteDatabase db;
+
+    Button btnInsertar;
+    EditText edtName;
+    View rootView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -75,18 +81,32 @@ public class Network extends Fragment {
         db = conexion.getWritableDatabase();
         if(conexion!=null){
             Toast.makeText(getContext(),"Bd Creadad",Toast.LENGTH_SHORT).show();
+            String query="insert into estudiante (name) values ('royer');";
+            db.execSQL(query);
         }
     }
 
-    public void dataBaseCreate(){
-
+    public void insertDatabase(String name){
+        String query="insert into estudiante (name) values ('"+name+"');";
+        db.execSQL(query);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_network, container, false);
+        rootView = inflater.inflate(R.layout.fragment_network, container, false);
+
+        btnInsertar = (Button) rootView.findViewById(R.id.btnRegistrar);
+        edtName = (EditText) rootView.findViewById(R.id.edName);
+        btnInsertar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name=edtName.getText().toString().trim();
+                insertDatabase(name);
+            }
+        });
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
