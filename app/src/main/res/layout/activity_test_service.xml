@@ -19,6 +19,7 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/primary_text"
             android:onClick="volver"
             android:text="Volver" />
 
@@ -27,6 +28,7 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/primary_text"
             android:onClick="IniciarServicio2"
             android:text="Other proccess" />
         <Button
@@ -35,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="IniciarServicio1"
+            android:background="@color/primary_text"
             android:text="Equals Proccess" />
         <TextView
             android:id="@+id/colorear"

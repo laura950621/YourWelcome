@@ -75,6 +75,7 @@ public class Network extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
         //hasOptionsMenu();
         setHasOptionsMenu(true);
         conexion = new Connection(getContext(),"UnivalleDb",null,1);
@@ -88,7 +89,11 @@ public class Network extends Fragment {
 
     public void insertDatabase(String name){
         String query="insert into estudiante (name) values ('"+name+"');";
-        db.execSQL(query);
+        if(name.isEmpty()){
+          Toast.makeText(getContext(),"Ingrese un nombre",Toast.LENGTH_SHORT).show();
+            db.execSQL(query);
+        }
+
     }
 
     @Override
